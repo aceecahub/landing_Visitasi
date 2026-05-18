@@ -31,6 +31,7 @@ import {
   ArrowUpRight
 } from "lucide-react";
 import ScrollVideo from "@/app/components/ScrollVideo";
+import { useSmoothScroll } from "@/app/components/SmoothScrollProvider";
 
 // ─── Color Palette ───
 const COLORS = {
@@ -722,33 +723,50 @@ function AfterSalesSection() {
 function TeamSection() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const lenis = useSmoothScroll();
+
+  const [activeMember, setActiveMember] = useState<{ name: string; video: string } | null>(null);
 
   const team = [
     {
-      name: "Tim UI/UX",
-      role: "Perancang Visual & Mockup",
-      nim: "Kelompok Visitasi 1",
-      image: "/team1.jpg",
+      name: "Asisyah Sarah Azzahra",
+      role: "Team Leader & Analyst",
+      nim: "202402009",
+      image: "/img/asisyah.png",
+      video: "/jj/asisyah.mp4",
     },
     {
-      name: "Tim Frontend Mobile & Web",
-      role: "Implementor UI & Animasi GSAP",
-      nim: "Kelompok Visitasi 2",
-      image: "/team2.jpg",
+      name: "Echa Muhammad Roffy Yandi",
+      role: "Frontend & Researcher",
+      nim: "202402020",
+      image: "/img/echa.jpeg",
+      video: "/jj/echa.mp4",
     },
     {
-      name: "Tim Backend Developer",
-      role: "Perancang Database & API Laravel",
-      nim: "Kelompok Visitasi 3",
-      image: "/team3.jpg",
+      name: "Aldyana",
+      role: "Content Creator",
+      nim: "202402036",
+      image: "/img/aldy.png",
+      video: "/jj/aldy.mp4",
     },
     {
-      name: "Tim Infrastructure Server",
-      role: "Sysadmin & Dedicated Server Config",
-      nim: "Kelompok Visitasi 4",
-      image: "/team4.jpg",
+      name: "Risma Rismaya",
+      role: "Documentation & Writer",
+      nim: "202402052",
+      image: "/img/risma.jpeg",
+      video: "/jj/risma.mp4",
     },
   ];
+
+  // Kunci Scroll Global (Lenis) saat modal video JJ aktif agar background tidak bergeser
+  useEffect(() => {
+    if (!lenis) return;
+    if (activeMember) {
+      lenis.stop();
+    } else {
+      lenis.start();
+    }
+  }, [lenis, activeMember]);
 
   return (
     <section id="tim" className="py-32 bg-[#0A0A0A] relative text-[#FAFAFA]">
@@ -767,7 +785,7 @@ function TeamSection() {
             Tim Visitasi <span className="text-[#8B2F8B]">Kami</span>
           </h2>
           <p className="mt-6 text-sm text-[#FAFAFA]/50 max-w-2xl mx-auto">
-            Anggota kelompok mahasiswa yang bertanggung jawab penuh atas analisis, pembuatan desain, hingga implementasi kode report visitasi interaktif ini.
+            Anggota kelompok mahasiswa yang bertanggung jawab penuh atas analisis, pembuatan desain, hingga implementasi kode report visitasi interaktif ini. klik card untuk melihat profil video JJ kami!
           </p>
         </motion.div>
 
@@ -778,11 +796,23 @@ function TeamSection() {
               initial={{ opacity: 0, y: 30 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ delay: i * 0.15, duration: 0.7 }}
-              className="relative p-6 rounded-2xl bg-white/[0.01] border border-white/[0.05] hover:border-[#8B2F8B]/30 transition-all duration-500 text-center"
+              onClick={() => setActiveMember({ name: member.name, video: member.video })}
+              className="relative p-6 rounded-2xl bg-white/[0.01] border border-white/[0.05] hover:border-[#8B2F8B]/50 hover:bg-white/[0.03] hover:scale-105 transition-all duration-500 text-center cursor-pointer shadow-md group"
             >
-              {/* Avatar Placeholder */}
-              <div className="relative w-28 h-28 mx-auto mb-6 rounded-full overflow-hidden bg-gradient-to-br from-[#8B2F8B]/20 to-[#2E8B57]/20 flex items-center justify-center">
-                <Users size={38} className="text-[#FAFAFA]/30" />
+              {/* Avatar Profile Image dengan hover zap/play glow */}
+              <div className="relative w-28 h-28 mx-auto mb-6 rounded-full overflow-hidden bg-gradient-to-br from-[#8B2F8B]/20 to-[#2E8B57]/20 flex items-center justify-center group-hover:shadow-[0_0_20px_rgba(139,47,139,0.45)] transition-all duration-300">
+                <Image
+                  src={member.image}
+                  alt={member.name}
+                  fill
+                  className="object-cover transition-transform duration-500 group-hover:scale-110"
+                />
+                {/* Glowing Zap Icon Overlay */}
+                <div className="absolute inset-0 bg-[#0A0A0A]/50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <div className="w-10 h-10 rounded-full bg-[#8B2F8B] text-[#FAFAFA] flex items-center justify-center shadow-[0_0_15px_rgba(139,47,139,0.8)] scale-75 group-hover:scale-100 transition-transform duration-300">
+                    <Zap size={16} className="fill-current" />
+                  </div>
+                </div>
               </div>
 
               <h3 className="text-base font-bold text-[#FAFAFA]">
@@ -798,8 +828,62 @@ function TeamSection() {
           ))}
         </div>
       </div>
+
+      {/* 🎬 JEDAG JEDUG (JJ) PROFILE VIDEO MODAL POPUP */}
+      <AnimatePresence>
+        {activeMember && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-lg p-4"
+            onClick={() => setActiveMember(null)}
+          >
+            {/* Tombol Close */}
+            <div className="absolute top-6 right-6 text-white cursor-pointer hover:text-[#8B2F8B] transition-colors p-2 bg-white/5 rounded-full border border-white/10 hover:border-[#8B2F8B]/30 hover:shadow-[0_0_15px_rgba(139,47,139,0.5)] z-50">
+              <X size={20} />
+            </div>
+
+            {/* Container Video Portrait (9:16) */}
+            <motion.div
+              initial={{ scale: 0.9, y: 20, opacity: 0 }}
+              animate={{ scale: 1, y: 0, opacity: 1 }}
+              exit={{ scale: 0.9, y: 20, opacity: 0 }}
+              transition={{ type: "spring", damping: 25, stiffness: 200 }}
+              className="relative w-full max-w-[320px] aspect-[9/16] rounded-3xl overflow-hidden border-2 border-[#8B2F8B] shadow-[0_0_50px_rgba(139,47,139,0.4)] bg-[#0A0A0A]"
+              onClick={(e) => e.stopPropagation()} // Cegah klik menutup modal
+            >
+              <video
+                src={memberVideoFallback(activeMember.video)}
+                autoPlay
+                loop
+                playsInline
+                controls
+                className="w-full h-full object-cover"
+              />
+
+              {/* Glowing Badge Footer */}
+              <div className="absolute bottom-4 left-4 right-4 bg-[#0A0A0A]/70 backdrop-blur-md p-4 rounded-2xl border border-white/10 text-center font-mono">
+                <div className="text-[10px] text-[#B85FB8] font-bold tracking-[0.2em] animate-pulse flex items-center justify-center gap-1.5">
+                  <Zap size={11} className="fill-[#B85FB8]" />
+                  JEDAG JEDUG ACTIVE ⚡
+                </div>
+                <div className="text-xs font-bold text-[#FAFAFA] mt-1.5">
+                  {activeMember.name}
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
+}
+
+// Helper untuk fallback video jika file belum diupload di public/video
+function memberVideoFallback(videoUrl: string) {
+  // Anda dapat menaruh sample video fallback jika folder kosong
+  return videoUrl;
 }
 
 // ─── Footer ───

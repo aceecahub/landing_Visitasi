@@ -1,6 +1,6 @@
 "use client";
 
-import React, { createContext, useContext, useEffect, useRef } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 import Lenis from "@studio-freight/lenis";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -19,7 +19,7 @@ interface SmoothScrollProviderProps {
 }
 
 export default function SmoothScrollProvider({ children }: SmoothScrollProviderProps) {
-  const lenisRef = useRef<Lenis | null>(null);
+  const [lenisInstance, setLenisInstance] = useState<Lenis | null>(null);
 
   useEffect(() => {
     // 1. Inisialisasi Lenis dengan konfigurasi ultra-smooth & responsive mobile
@@ -33,10 +33,12 @@ export default function SmoothScrollProvider({ children }: SmoothScrollProviderP
       infinite: false,
     });
 
-    lenisRef.current = lenis;
+    setLenisInstance(lenis);
 
     // 2. Integrasikan Lenis dengan GSAP ScrollTrigger agar sinkron secara real-time
-    lenis.on("scroll", ScrollTrigger.update);
+    lenis.on("scroll", () => {
+      ScrollTrigger.update();
+    });
 
     // 3. Masukkan loop RAF Lenis ke dalam ticker GSAP agar update frame berjalan selaras
     const updateTicker = (time: number) => {
@@ -51,12 +53,12 @@ export default function SmoothScrollProvider({ children }: SmoothScrollProviderP
     return () => {
       gsap.ticker.remove(updateTicker);
       lenis.destroy();
-      lenisRef.current = null;
+      setLenisInstance(null);
     };
   }, []);
 
   return (
-    <SmoothScrollContext.Provider value={lenisRef.current}>
+    <SmoothScrollContext.Provider value={lenisInstance}>
       {children}
     </SmoothScrollContext.Provider>
   );
