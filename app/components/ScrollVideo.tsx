@@ -249,7 +249,7 @@ export default function ScrollVideo({
             preload="auto"
             controls={false}
             onLoadedMetadata={handleLoadedMetadata}
-            className="w-full h-full object-cover pointer-events-none opacity-60"
+            className="w-full h-full object-cover pointer-events-none opacity-40"
           />
         )}
         {/* Cinematic dark vignette overlay */}
@@ -292,9 +292,8 @@ export default function ScrollVideo({
               pointerEvents: scrollProgress < 0.15 ? "auto" : "none",
             }}
           >
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-[#8B2F8B]/30 bg-[#8B2F8B]/10 text-[#B85FB8] text-xs sm:text-sm mb-6 backdrop-blur-md font-mono">
-              <Building2 size={12} className="animate-pulse" />
-              STUDI VISITASI: ACCESS MEDIA (ACM)
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs sm:text-sm mb-6 backdrop-blur-md font-mono">
+              
             </div>
 
             <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black text-[#FAFAFA] leading-[1.15] tracking-tight max-w-5xl">
@@ -328,12 +327,11 @@ export default function ScrollVideo({
               </a>
             </div>
 
-            <div className="mt-16 grid grid-cols-2 sm:grid-cols-4 gap-6 sm:gap-12 max-w-3xl w-full border-t border-[#FAFAFA]/10 pt-8">
+            <div className="mt-16 grid grid-cols-2 sm:grid-cols-3 gap-6 sm:gap-12 max-w-3xl w-full border-t border-[#FAFAFA]/10 pt-8">
               {[
                 { value: "4", label: "Fokus Tim Kerja" },
                 { value: "3", label: "Pilar Tekno ACM" },
                 { value: "2", label: "Metrik Monitor" },
-                { value: "100%", label: "Support Garansi" },
               ].map((stat, i) => (
                 <div key={i} className="text-center">
                   <div className="text-xl sm:text-2xl font-bold text-[#FAFAFA] tracking-tight">

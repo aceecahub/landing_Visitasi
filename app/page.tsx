@@ -251,7 +251,7 @@ function BusinessProcessSection() {
   ];
 
   return (
-    <section id="business-process" className="py-32 bg-[#FAFAFA] relative overflow-hidden">
+    <section id="business-process" className="py-32 bg-[#0A0A0A] relative overflow-hidden border-b border-white/[0.03]">
       <div className="max-w-7xl mx-auto px-6 lg:px-8" ref={ref}>
         
         {/* Section Header */}
@@ -262,16 +262,16 @@ function BusinessProcessSection() {
             transition={{ duration: 0.8 }}
             className="lg:col-span-7"
           >
-            <span className="text-[#8B2F8B] text-xs font-bold tracking-[0.2em] uppercase px-3 py-1.5 rounded-full bg-[#8B2F8B]/5 border border-[#8B2F8B]/10">
+            <span className="text-[#8B2F8B] text-xs font-bold tracking-[0.2em] uppercase px-3 py-1.5 rounded-full bg-[#8B2F8B]/10 border border-[#8B2F8B]/25">
               01. Business Process
             </span>
-            <h2 className="mt-6 text-4xl sm:text-5xl font-black text-[#1A1A1A] leading-tight tracking-tight">
+            <h2 className="mt-6 text-4xl sm:text-5xl font-black text-[#FAFAFA] leading-tight tracking-tight">
               Semua Dimulai dari Ngobrol, <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#8B2F8B] to-[#2E8B57]">
                 Bukan Langsung Coding
               </span>
             </h2>
-            <p className="mt-6 text-base text-[#1A1A1A]/60 leading-relaxed max-w-2xl">
+            <p className="mt-6 text-base text-[#FAFAFA]/70 leading-relaxed max-w-2xl">
               Setiap bisnis punya polanya sendiri. Ada yang ingin kerjanya lebih cepat, ada yang ingin data usahanya tidak berantakan, atau ada yang ingin semua hal bisa dipantau di satu layar monitor. 
               <br /><br />
               Makanya, sebelum kami mengetik kode baris pertama, kami membedah bersama alur operasional bisnis nyata Anda demi merancang blueprint sistem terbaik.
@@ -282,14 +282,14 @@ function BusinessProcessSection() {
             initial={{ opacity: 0, scale: 0.95 }}
             animate={isInView ? { opacity: 1, scale: 1 } : {}}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="lg:col-span-5 bg-gradient-to-br from-[#8B2F8B]/10 to-[#2E8B57]/10 p-8 rounded-3xl border border-black/5 relative overflow-hidden"
+            className="lg:col-span-5 bg-gradient-to-br from-[#8B2F8B]/20 to-[#2E8B57]/10 p-8 rounded-3xl border border-white/[0.05] relative overflow-hidden"
           >
-            <div className="absolute top-0 right-0 w-24 h-24 bg-white/20 rounded-full blur-2xl" />
-            <h3 className="text-lg font-bold text-[#1A1A1A] mb-2 flex items-center gap-2">
+            <div className="absolute top-0 right-0 w-24 h-24 bg-white/5 rounded-full blur-2xl" />
+            <h3 className="text-lg font-bold text-[#FAFAFA] mb-2 flex items-center gap-2">
               <Sparkles size={18} className="text-[#8B2F8B]" />
               Riset Visitasi Access Media
             </h3>
-            <p className="text-xs text-[#1A1A1A]/60 leading-relaxed">
+            <p className="text-xs text-[#FAFAFA]/65 leading-relaxed">
               Berdasarkan kunjungan visitasi kelompok kami ke <strong>Access Media (ACM)</strong>, kami melihat bahwa pemetaan kebutuhan klien dilakukan secara komprehensif dari pencatatan log data administratif lama hingga diintegrasikan dengan database modern.
             </p>
           </motion.div>
@@ -303,15 +303,15 @@ function BusinessProcessSection() {
               initial={{ opacity: 0, y: 30 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ delay: i * 0.15, duration: 0.7 }}
-              className="p-8 rounded-2xl bg-white border border-[#1A1A1A]/5 shadow-[0_4px_30px_rgba(0,0,0,0.02)] hover:border-[#8B2F8B]/20 transition-all duration-300 relative group"
+              className="p-8 rounded-2xl bg-white/[0.01] border border-white/[0.05] shadow-[0_4px_30px_rgba(0,0,0,0.2)] hover:border-[#8B2F8B]/40 hover:bg-white/[0.03] transition-all duration-300 relative group"
             >
-              <div className="w-10 h-10 rounded-xl bg-gray-50 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+              <div className="w-10 h-10 rounded-xl bg-white/[0.05] flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
                 {item.icon}
               </div>
-              <h3 className="text-lg font-bold text-[#1A1A1A] mb-3 leading-snug">
+              <h3 className="text-lg font-bold text-[#FAFAFA] mb-3 leading-snug">
                 {item.question}
               </h3>
-              <p className="text-sm text-[#1A1A1A]/55 leading-relaxed">
+              <p className="text-sm text-[#FAFAFA]/55 leading-relaxed">
                 {item.desc}
               </p>
             </motion.div>
@@ -403,9 +403,8 @@ function WorkflowSection() {
           ))}
         </div>
 
-        {/* Collaboration Tools */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 40 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, delay: 0.3 }}
           className="p-8 rounded-3xl border border-white/[0.05] bg-gradient-to-r from-[#8B2F8B]/10 to-[#2E8B57]/5 mb-24"
@@ -422,13 +421,44 @@ function WorkflowSection() {
             </div>
             <div className="md:col-span-7 grid grid-cols-3 gap-4 text-center">
               {[
-                { name: "Trello", role: "Tugas & Board", color: "from-[#8B2F8B] to-[#5E1F5E]" },
-                { name: "Microsoft To Do", role: "Task Management", color: "from-[#2E8B57] to-[#1E5E3A]" },
-                { name: "OneDrive", role: "Aset Cloud", color: "from-[#4CAF7A] to-[#2E8B57]" }
+                {
+                  name: "Trello",
+                  role: "Tugas & Board",
+                  color: "from-[#8B2F8B]/20 to-[#5E1F5E]/20 border border-[#8B2F8B]/30",
+                  icon: (
+                    <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <rect width="24" height="24" rx="4" fill="#0079BF"/>
+                      <rect x="4" y="4" width="7" height="13" rx="1.5" fill="white"/>
+                      <rect x="13" y="4" width="7" height="8" rx="1.5" fill="white"/>
+                    </svg>
+                  )
+                },
+                {
+                  name: "Microsoft To Do",
+                  role: "Task Management",
+                  color: "from-[#2E8B57]/20 to-[#1E5E3A]/20 border border-[#2E8B57]/30",
+                  icon: (
+                    <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <rect width="24" height="24" rx="4" fill="#3C6DF0"/>
+                      <path d="M17 8.5L9.5 16L6 12.5" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  )
+                },
+                {
+                  name: "OneDrive",
+                  role: "Aset Cloud",
+                  color: "from-[#4CAF7A]/20 to-[#2E8B57]/20 border border-[#4CAF7A]/30",
+                  icon: (
+                    <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <rect width="24" height="24" rx="4" fill="#0078D4"/>
+                      <path d="M6 14.5C6 12.01 8.01 10 10.5 10C10.74 10 10.98 10.02 11.21 10.06C12.15 7.67 14.48 6 17.2 6C20.96 6 24 9.04 24 12.8C24 12.87 24 12.93 24 13C24 16.31 21.31 19 18 19H7C4.24 19 2 16.76 2 14C2 11.58 3.72 9.56 6.06 9.09C6.02 9.22 6 9.36 6 9.5V14.5Z" fill="white"/>
+                    </svg>
+                  )
+                }
               ].map((tool, idx) => (
-                <div key={idx} className="p-4 rounded-xl border border-white/[0.05] bg-white/[0.01]">
-                  <div className={`w-8 h-8 rounded-full bg-gradient-to-tr ${tool.color} mx-auto mb-2 flex items-center justify-center font-bold text-xs`}>
-                    {tool.name[0]}
+                <div key={idx} className="p-4 rounded-xl border border-white/[0.05] bg-white/[0.01] hover:border-white/10 transition-colors">
+                  <div className={`w-9 h-9 rounded-xl bg-gradient-to-tr ${tool.color} mx-auto mb-3 flex items-center justify-center`}>
+                    {tool.icon}
                   </div>
                   <div className="font-bold text-xs text-[#FAFAFA]">{tool.name}</div>
                   <div className="text-[9px] text-[#FAFAFA]/40 mt-0.5">{tool.role}</div>
@@ -475,41 +505,60 @@ function TechStackSection() {
       title: "Figma",
       category: "Desain Antarmuka",
       desc: "Merancang rancangan visual (UI/UX) dan mockup interaktif agar Anda mendapatkan gambaran utuh sebelum aplikasi mulai di-coding.",
-      icon: <Palette size={26} />,
-      color: "#8B2F8B"
+      icon: (
+        <svg className="w-7 h-7" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 6C12 3.79 10.21 2 8 2C5.79 2 4 3.79 4 6C4 8.21 5.79 10 8 10H12V6Z" fill="#F24E1E"/>
+          <path d="M4 14C4 11.79 5.79 10 8 10H12V18C12 20.21 10.21 22 8 22C5.79 22 4 20.21 4 18C4 15.79 5.79 14 8 14" fill="#A259FF"/>
+          <path d="M12 10H16C18.21 10 20 8.21 20 6C20 3.79 18.21 2 16 2C13.79 2 12 3.79 12 6V10Z" fill="#FF7262"/>
+          <path d="M12 14H16C18.21 14 20 15.79 20 18C20 20.21 18.21 22 16 22C13.79 22 12 20.21 12 18V14Z" fill="#1ABC9C"/>
+          <path d="M12 14H8C5.79 14 4 15.79 4 18C4 20.21 5.79 22 8 22C10.21 22 12 20.21 12 18V14Z" fill="#0ACF83"/>
+        </svg>
+      ),
+      color: "#F24E1E"
     },
     {
       title: "Laravel",
       category: "Backend & Core logic",
       desc: "Framework PHP kelas dunia yang sangat kokoh, terkenal aman, stabil untuk kebutuhan enterprise, dan memiliki struktur routing yang rapi.",
-      icon: <Code2 size={26} />,
-      color: "#2E8B57"
+      icon: (
+        <svg className="w-7 h-7" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M21 7.25V16.75L12 22L3 16.75V7.25L12 2L21 7.25Z" stroke="#FF2D20" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+          <path d="M12 22V12" stroke="#FF2D20" strokeWidth="2.5" strokeLinecap="round"/>
+          <path d="M12 12L21 7.25" stroke="#FF2D20" strokeWidth="2.5" strokeLinecap="round"/>
+          <path d="M12 12L3 7.25" stroke="#FF2D20" strokeWidth="2.5" strokeLinecap="round"/>
+        </svg>
+      ),
+      color: "#FF2D20"
     },
     {
       title: "Tailwind CSS",
       category: "CSS Utility Framework",
       desc: "Utility-first CSS untuk menciptakan tampilan responsif berestetika premium—rapi dibuka di layar HP, tablet, maupun monitor komputer.",
-      icon: <Monitor size={26} />,
-      color: "#B85FB8"
+      icon: (
+        <svg className="w-7 h-7" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12.001 4.285c-2.457 0-4.096.982-4.915 2.946 1.228-.818 2.457-.614 3.685.613.7 0 1.258.598 1.838 1.22 1.05 1.134 2.274 2.457 5.168 2.457 2.456 0 4.095-.981 4.914-2.945-1.228.818-2.456.613-3.684-.613-.7 0-1.259-.6-1.839-1.221-.945-1.02-2.148-2.457-5.168-2.457zM5.456 10.428C3 10.428 1.36 11.41.542 13.375c1.228-.82 2.456-.614 3.684.613.7 0 1.26.6 1.839 1.22 1.05 1.135 2.274 2.458 5.168 2.458 2.456 0 4.096-.982 4.915-2.946-1.228.818-2.457.613-3.685-.613-.7 0-1.258-.6-1.838-1.22-.945-1.021-2.149-2.459-5.17-2.459z" fill="#38BDF8"/>
+        </svg>
+      ),
+      color: "#38BDF8"
     }
   ];
 
   return (
-    <section id="tech-stack" className="py-32 bg-[#FAFAFA] relative overflow-hidden">
+    <section id="tech-stack" className="py-32 bg-[#0A0A0A] relative overflow-hidden border-b border-white/[0.03]">
       <div className="max-w-7xl mx-auto px-6 lg:px-8" ref={ref}>
         
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-20">
-          <span className="text-[#8B2F8B] text-xs font-bold tracking-[0.2em] uppercase px-3 py-1.5 rounded-full bg-[#8B2F8B]/5 border border-[#8B2F8B]/10">
+          <span className="text-[#8B2F8B] text-xs font-bold tracking-[0.2em] uppercase px-3 py-1.5 rounded-full bg-[#8B2F8B]/10 border border-[#8B2F8B]/25">
             03. Tech Stack & Optimization
           </span>
-          <h2 className="mt-6 text-4xl sm:text-5xl font-black text-[#1A1A1A] leading-tight">
+          <h2 className="mt-6 text-4xl sm:text-5xl font-black text-[#FAFAFA] leading-tight">
             Tampilan Cakep, tapi <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#8B2F8B] to-[#2E8B57]">
               yang Penting Gak Lemot!
             </span>
           </h2>
-          <p className="mt-6 text-sm sm:text-base text-[#1A1A1A]/50 leading-relaxed">
+          <p className="mt-6 text-sm sm:text-base text-[#FAFAFA]/50 leading-relaxed">
             Aplikasi kalau tampilannya estetik tapi pas diklik muter-muter (loading) lama, ujung-ujungnya bikin karyawan stres dan produktivitas terhambat. Kami tidak ingin membuat aplikasi yang mengecewakan seperti itu.
           </p>
         </div>
@@ -522,19 +571,19 @@ function TechStackSection() {
               initial={{ opacity: 0, y: 30 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ delay: i * 0.1, duration: 0.6 }}
-              className="group relative p-8 rounded-2xl bg-[#1A1A1A]/[0.02] border border-[#1A1A1A]/5 hover:border-[#8B2F8B]/20 transition-all duration-500 hover:bg-white hover:shadow-[0_10px_40px_rgba(0,0,0,0.03)]"
+              className="group relative p-8 rounded-2xl bg-white/[0.01] border border-white/[0.05] hover:border-[#8B2F8B]/40 transition-all duration-500 hover:bg-white/[0.03] hover:shadow-[0_10px_40px_rgba(0,0,0,0.2)]"
             >
-              <span className="text-[10px] font-mono uppercase tracking-wider text-[#1A1A1A]/40">
+              <span className="text-[10px] font-mono uppercase tracking-wider text-[#FAFAFA]/40">
                 {tech.category}
               </span>
               <div
                 className="w-12 h-12 rounded-xl flex items-center justify-center my-5 transition-transform duration-300 group-hover:scale-110"
-                style={{ backgroundColor: `${tech.color}10`, color: tech.color }}
+                style={{ backgroundColor: `${tech.color}15` }}
               >
                 {tech.icon}
               </div>
-              <h3 className="text-lg font-bold text-[#1A1A1A] mb-3">{tech.title}</h3>
-              <p className="text-xs text-[#1A1A1A]/60 leading-relaxed">{tech.desc}</p>
+              <h3 className="text-lg font-bold text-[#FAFAFA] mb-3">{tech.title}</h3>
+              <p className="text-xs text-[#FAFAFA]/60 leading-relaxed">{tech.desc}</p>
             </motion.div>
           ))}
         </div>
@@ -544,7 +593,7 @@ function TechStackSection() {
           initial={{ opacity: 0, y: 40 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, delay: 0.3 }}
-          className="p-8 rounded-3xl border border-black/5 bg-gradient-to-br from-[#1A1A1A]/[0.01] via-transparent to-[#8B2F8B]/5"
+          className="p-8 rounded-3xl border border-white/[0.05] bg-gradient-to-br from-white/[0.01] via-transparent to-[#8B2F8B]/5"
         >
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
@@ -552,13 +601,13 @@ function TechStackSection() {
                 <Activity size={14} className="animate-pulse" />
                 SISTEM ANTI-LAG OPTIMIZATION
               </div>
-              <h3 className="text-2xl font-black text-[#1A1A1A] leading-tight mb-4">
+              <h3 className="text-2xl font-black text-[#FAFAFA] leading-tight mb-4">
                 Gak Pakai Nge-lag Selama Operasional Kerja
               </h3>
-              <p className="text-sm text-[#1A1A1A]/60 leading-relaxed mb-6">
+              <p className="text-sm text-[#FAFAFA]/65 leading-relaxed mb-6">
                 Sistem dan struktur database kami rancang secara kokoh dari tahap paling awal agar sangat ringan, tidak memakan memori CPU server secara boros, dan tetap responsif ketika diakses oleh banyak karyawan secara bersamaan di jam sibuk kerja harian.
               </p>
-              <div className="flex flex-col gap-3 font-mono text-[11px] text-[#1A1A1A]/70">
+              <div className="flex flex-col gap-3 font-mono text-[11px] text-[#FAFAFA]/70">
                 <div className="flex items-center gap-2"><CheckCircle size={14} className="text-[#2E8B57]" /> Optimasi Indexing Query Database</div>
                 <div className="flex items-center gap-2"><CheckCircle size={14} className="text-[#2E8B57]" /> Caching Halaman Ringan via Redis</div>
                 <div className="flex items-center gap-2"><CheckCircle size={14} className="text-[#2E8B57]" /> Kompresi Aset Gambar & Skrip CSS/JS</div>
@@ -616,12 +665,22 @@ function ServerSection() {
     {
       title: "cPanel & CyberPanel",
       desc: "Manajemen panel pengoperasian server yang stabil, aman, dan mempermudah pemantauan file sistem data.",
-      icon: <Settings size={22} className="text-[#4CAF7A]" />
+      icon: (
+        <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect width="24" height="24" rx="5" fill="#FF6C2C"/>
+          <path d="M7 8.5C7 7.67 7.67 7 8.5 7H11.5C12.33 7 13 7.67 13 8.5V9.5C13 10.33 12.33 11 11.5 11H9.5V13H11.5C12.33 13 13 13.67 13 14.5V15.5C13 16.33 12.33 17 11.5 17H8.5C7.67 17 7 16.33 7 15.5V8.5Z" fill="white"/>
+        </svg>
+      )
     },
     {
       title: "Cloudflare CDN Proxy",
       desc: "Terpasang di gerbang depan untuk menyaring trafik berbahaya, menahan serangan DDoS, sekaligus mempercepat loading data.",
-      icon: <Cloud size={22} className="text-[#8B2F8B]" />
+      icon: (
+        <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12.03 5C9.07 5 6.6 7.15 6.13 10H5.5C2.46 10 0 12.46 0 15.5C0 18.54 2.46 21 5.5 21H18.5C21.54 21 24 18.54 24 15.5C24 12.78 22.04 10.5 19.46 10.08C19 7.18 16.5 5 13.5 5C13.01 5 12.51 5.07 12.03 5Z" fill="#F38020"/>
+          <path d="M12.03 5C9.07 5 6.6 7.15 6.13 10H10L8.5 7.5L12.03 5Z" fill="#FAAD3F"/>
+        </svg>
+      )
     }
   ];
 
@@ -753,8 +812,8 @@ function AfterSalesSection() {
   ];
 
   return (
-    <section id="after-sales" className="py-32 bg-[#FAFAFA] relative overflow-hidden">
-      <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-[#8B2F8B]/3 rounded-full blur-[120px]" />
+    <section id="after-sales" className="py-32 bg-[#0A0A0A] relative overflow-hidden border-b border-white/[0.03]">
+      <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-[#8B2F8B]/5 rounded-full blur-[120px]" />
       
       <div className="max-w-4xl mx-auto px-6 lg:px-8 relative z-10 text-center" ref={ref}>
         <motion.div
@@ -762,16 +821,16 @@ function AfterSalesSection() {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
         >
-          <span className="text-[#8B2F8B] text-xs font-bold tracking-[0.25em] uppercase px-3 py-1.5 rounded-full bg-[#8B2F8B]/5 border border-[#8B2F8B]/10 font-mono">
+          <span className="text-[#8B2F8B] text-xs font-bold tracking-[0.25em] uppercase px-3 py-1.5 rounded-full bg-[#8B2F8B]/10 border border-[#8B2F8B]/25 font-mono">
             05. After Sales Service
           </span>
-          <h2 className="mt-6 text-4xl sm:text-5xl font-black text-[#1A1A1A] leading-tight">
+          <h2 className="mt-6 text-4xl sm:text-5xl font-black text-[#FAFAFA] leading-tight">
             Lagian, Project Gak Selesai <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#8B2F8B] to-[#2E8B57]">
               Pas Aplikasi Dikirim...
             </span>
           </h2>
-          <p className="mt-6 text-[#1A1A1A]/60 text-sm sm:text-base leading-relaxed max-w-2xl mx-auto">
+          <p className="mt-6 text-[#FAFAFA]/70 text-sm sm:text-base leading-relaxed max-w-2xl mx-auto">
             Banyak pengembang/vendor IT yang mendadak hilang tanpa kabar setelah aplikasi selesai dibayar penuh. Kami tidak bekerja dengan cara yang tidak bertanggung jawab seperti itu. 
             <br /><br />
             Setelah sistem Anda resmi berjalan *live*, kami tetap membuka layanan pendampingan penuh untuk menjaga kelancaran bisnis Anda.
@@ -780,12 +839,12 @@ function AfterSalesSection() {
           {/* Guarantee Cards */}
           <div className="mt-16 grid sm:grid-cols-3 gap-6 text-left">
             {supportGuarantees.map((item, idx) => (
-              <div key={idx} className="p-6 rounded-2xl border border-black/5 bg-white shadow-[0_4px_30px_rgba(0,0,0,0.01)] hover:border-[#8B2F8B]/20 transition-all duration-300">
-                <h3 className="text-sm font-bold text-[#1A1A1A] mb-2 flex items-center gap-1.5">
+              <div key={idx} className="p-6 rounded-2xl border border-white/[0.05] bg-white/[0.01] hover:border-[#8B2F8B]/40 hover:bg-white/[0.03] transition-all duration-300">
+                <h3 className="text-sm font-bold text-[#FAFAFA] mb-2 flex items-center gap-1.5">
                   <span className="w-1.5 h-1.5 rounded-full bg-[#8B2F8B]" />
                   {item.title}
                 </h3>
-                <p className="text-xs text-[#1A1A1A]/50 leading-relaxed">
+                <p className="text-xs text-[#FAFAFA]/50 leading-relaxed">
                   {item.desc}
                 </p>
               </div>
@@ -812,6 +871,7 @@ function TeamSection() {
       nim: "202402009",
       image: "/img/asisyah.png",
       video: "/jj/asisyah.mp4",
+      quote: "Aku banyak ambil peran di bagian ide dan implementasi, mulai dari nyusun konsep, ngatur flow kerja tim, sampai bantu memastikan semua bagian bisa jalan sesuai target. Aku juga sering jadi tempat diskusi waktu tim bingung menentukan arah atau ada kendala teknis agar semua anggota ngerti gagasan aku. Tantangan paling kerasa itu pas bingung menentukan arah atau ada kendala teknis agar semua anggota ngerti ide gila aku dalam waktu yang cukup singkat."
     },
     {
       name: "Echa Muhammad Roffy Yandi",
@@ -819,6 +879,7 @@ function TeamSection() {
       nim: "202402020",
       image: "/img/echa.jpeg",
       video: "/jj/echa.mp4",
+      quote: "Menanyakan seputar Backend dan Devops di perusahaan serta memahami bagaimana cara aplikasi bisa diakses secara publik. dan bagaimana langkah maintenance jika ada kendala di server aplikasi yang telah di publish. Tantangannya masih asing dengan istilah Depolyment dan DevOps tapi mengerti sedikit demi sedikit.",
     },
     {
       name: "Aldyana",
@@ -826,6 +887,7 @@ function TeamSection() {
       nim: "202402036",
       image: "/img/aldy.png",
       video: "/jj/aldy.mp4",
+      quote: "Bertanya terkait workflow dan alur kerja di perusahaan dan hal apa yang harus dikuasai jika ingin masuk ke industri IT. Tantangannya ternyata bahwa kita tidak hanya harus bisa coding tetapi kita juga harus pintar dalam analisis, public speaking dan juga problem solving",
     },
     {
       name: "Risma Rismaya",
@@ -833,6 +895,7 @@ function TeamSection() {
       nim: "202402052",
       image: "/img/risma.jpeg",
       video: "/jj/risma.mp4",
+      quote: "Menanyakan bagaimana cara AI membantu dalam menyelesaikan masalah yang di hadapi perusahaan dan pengoptimalan penggunaan AI. Tantangan yang saya hadapi ketika bagaimana AI bisa mengambil alih fungsi programmer jika tidak bisa bersaing di dunia industri begitupun dengan analis",
     },
   ];
 
@@ -875,33 +938,42 @@ function TeamSection() {
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ delay: i * 0.15, duration: 0.7 }}
               onClick={() => setActiveMember({ name: member.name, video: member.video })}
-              className="relative p-6 rounded-2xl bg-white/[0.01] border border-white/[0.05] hover:border-[#8B2F8B]/50 hover:bg-white/[0.03] hover:scale-105 transition-all duration-500 text-center cursor-pointer shadow-md group"
+              className="relative p-6 rounded-2xl bg-white/[0.01] border border-white/[0.05] hover:border-[#8B2F8B]/50 hover:bg-white/[0.03] hover:scale-105 transition-all duration-500 text-center cursor-pointer shadow-md group flex flex-col justify-between"
             >
-              {/* Avatar Profile Image dengan hover zap/play glow */}
-              <div className="relative w-28 h-28 mx-auto mb-6 rounded-full overflow-hidden bg-gradient-to-br from-[#8B2F8B]/20 to-[#2E8B57]/20 flex items-center justify-center group-hover:shadow-[0_0_20px_rgba(139,47,139,0.45)] transition-all duration-300">
-                <Image
-                  src={member.image}
-                  alt={member.name}
-                  fill
-                  className="object-cover transition-transform duration-500 group-hover:scale-110"
-                />
-                {/* Glowing Zap Icon Overlay */}
-                <div className="absolute inset-0 bg-[#0A0A0A]/50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <div className="w-10 h-10 rounded-full bg-[#8B2F8B] text-[#FAFAFA] flex items-center justify-center shadow-[0_0_15px_rgba(139,47,139,0.8)] scale-75 group-hover:scale-100 transition-transform duration-300">
-                    <Zap size={16} className="fill-current" />
-                  </div>
+              <div>
+                {/* Avatar Profile Image dengan hover "CLICK HERE" glow overlay */}
+                <div className="relative w-28 h-28 mx-auto mb-6 rounded-full overflow-hidden bg-gradient-to-br from-[#8B2F8B]/20 to-[#2E8B57]/20 flex items-center justify-center group-hover:shadow-[0_0_20px_rgba(139,47,139,0.45)] transition-all duration-300">
+                  <Image
+                    src={member.image}
+                    alt={member.name}
+                    fill
+                    className="object-cover transition-transform duration-500 group-hover:scale-110"
+                  />
                 </div>
+
+                <h3 className="text-base font-bold text-[#FAFAFA]">
+                  {member.name}
+                </h3>
+                <p className="text-[#B85FB8] text-xs font-medium mt-1">
+                  {member.role}
+                </p>
+                <p className="text-[#FAFAFA]/30 text-[10px] mt-2 font-mono">
+                  {member.nim}
+                </p>
+
+                {/* Tulisan Motivasi Anggota */}
+                <p className="mt-5 text-[11px] italic font-medium text-[#FAFAFA]/60 leading-relaxed bg-white/[0.01] p-3 rounded-xl border border-white/[0.03] font-mono group-hover:text-[#FAFAFA]/90 group-hover:border-[#8B2F8B]/20 group-hover:bg-[#8B2F8B]/5 transition-all duration-300">
+                  "{member.quote}"
+                </p>
               </div>
 
-              <h3 className="text-base font-bold text-[#FAFAFA]">
-                {member.name}
-              </h3>
-              <p className="text-[#B85FB8] text-xs font-medium mt-1">
-                {member.role}
-              </p>
-              <p className="text-[#FAFAFA]/30 text-[10px] mt-2 font-mono">
-                {member.nim}
-              </p>
+              {/* Action Button Indicator */}
+              <div className="mt-6 flex justify-center">
+                <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-[9px] font-bold tracking-widest text-[#FAFAFA]/40 font-mono uppercase transition-all duration-300 group-hover:bg-[#8B2F8B]/20 group-hover:border-[#8B2F8B]/40 group-hover:text-[#FAFAFA] group-hover:shadow-[0_0_15px_rgba(139,47,139,0.3)]">
+                  <Zap size={9} className="group-hover:text-[#B85FB8] group-hover:animate-bounce" />
+                  CLICK HERE
+                </span>
+              </div>
             </motion.div>
           ))}
         </div>
