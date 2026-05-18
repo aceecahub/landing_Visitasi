@@ -32,6 +32,7 @@ import {
   Briefcase,
   Monitor,
 } from "lucide-react";
+import ScrollVideo from "@/app/components/ScrollVideo";
 
 // ─── Color Palette ───
 const COLORS = {
@@ -91,7 +92,7 @@ function Navbar() {
                   className="object-contain transition-transform duration-300 group-hover:scale-110"
                 />
               </div>
-              <span className="text-[#1A1A1A] font-bold text-lg tracking-tight hidden sm:block">
+              <span className={`font-bold text-lg tracking-tight hidden sm:block transition-colors duration-300 ${scrolled ? "text-[#1A1A1A]" : "text-[#FAFAFA]"}`}>
                 VISITASI<span className="text-[#8B2F8B]">ACM</span>
               </span>
             </a>
@@ -102,7 +103,7 @@ function Navbar() {
                 <a
                   key={link.name}
                   href={link.href}
-                  className="text-sm text-[#1A1A1A]/60 hover:text-[#1A1A1A] transition-colors duration-300 relative group"
+                  className={`text-sm transition-colors duration-300 relative group ${scrolled ? "text-[#1A1A1A]/60 hover:text-[#1A1A1A]" : "text-[#FAFAFA]/70 hover:text-[#FAFAFA]"}`}
                 >
                   {link.name}
                   <span className="absolute -bottom-1 left-0 w-0 h-[2px] bg-[#8B2F8B] transition-all duration-300 group-hover:w-full" />
@@ -113,7 +114,7 @@ function Navbar() {
             {/* Mobile Toggle */}
             <button
               onClick={() => setMobileOpen(!mobileOpen)}
-              className="md:hidden text-[#1A1A1A] p-2"
+              className={`md:hidden p-2 transition-colors duration-300 ${scrolled ? "text-[#1A1A1A]" : "text-[#FAFAFA]"}`}
             >
               {mobileOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
@@ -146,152 +147,6 @@ function Navbar() {
         )}
       </AnimatePresence>
     </>
-  );
-}
-
-// ─── Hero Section ───
-function HeroSection() {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end start"],
-  });
-  const y = useTransform(scrollYProgress, [0, 1], [0, 200]);
-  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
-
-  return (
-    <section
-      ref={containerRef}
-      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#FAFAFA]"
-    >
-      {/* Animated Background Grid */}
-      <div className="absolute inset-0 opacity-10">
-        <div
-          className="absolute inset-0"
-          style={{
-            backgroundImage: `linear-gradient(rgba(139, 47, 139, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(139, 47, 139, 0.1) 1px, transparent 1px)`,
-            backgroundSize: "60px 60px",
-          }}
-        />
-      </div>
-
-      {/* Floating Orbs */}
-      <motion.div
-        animate={{
-          x: [0, 100, 0],
-          y: [0, -50, 0],
-        }}
-        transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-        className="absolute top-1/4 left-1/4 w-96 h-96 bg-[#8B2F8B]/10 rounded-full blur-[120px]"
-      />
-      <motion.div
-        animate={{
-          x: [0, -80, 0],
-          y: [0, 60, 0],
-        }}
-        transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
-        className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-[#2E8B57]/5 rounded-full blur-[100px]"
-      />
-
-      <motion.div
-        style={{ y, opacity }}
-        className="relative z-10 text-center px-6 max-w-5xl mx-auto"
-      >
-        {/* Badge */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2 }}
-          className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-[#8B2F8B]/30 bg-[#8B2F8B]/10 text-[#B85FB8] text-sm mb-8"
-        >
-          <Building2 size={14} />
-          Laporan Visitasi Perusahaan
-        </motion.div>
-
-        {/* Main Headline */}
-        <motion.h1
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.4, duration: 0.8 }}
-          className="text-5xl sm:text-7xl lg:text-8xl font-bold text-[#1A1A1A] leading-[1.1] tracking-tight"
-        >
-          Visitasi
-          <br />
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#8B2F8B] via-[#B85FB8] to-[#2E8B57]">
-            Access Media Lab
-          </span>
-        </motion.h1>
-
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.6 }}
-          className="mt-8 text-lg sm:text-xl text-[#1A1A1A]/50 max-w-2xl mx-auto leading-relaxed"
-        >
-          Analisis teknologi, infrastruktur, dan sistem yang digunakan oleh
-          Access Media Lab dalam operasional bisnisnya.
-        </motion.p>
-
-        {/* CTA Buttons */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.8 }}
-          className="mt-12 flex flex-col sm:flex-row items-center justify-center gap-4"
-        >
-          <a
-            href="#profil"
-            className="group px-8 py-4 bg-[#8B2F8B] text-[#1A1A1A] font-medium rounded-full hover:bg-[#B85FB8] transition-all duration-300 flex items-center gap-2 hover:shadow-lg hover:shadow-[#8B2F8B]/30"
-          >
-            Lihat Laporan
-            <ArrowRight
-              size={18}
-              className="transition-transform group-hover:translate-x-1"
-            />
-          </a>
-          <a
-            href="#tim"
-            className="px-8 py-4 border border-[#1A1A1A]/20 text-[#1A1A1A] font-medium rounded-full hover:bg-[#1A1A1A]/5 transition-all duration-300 flex items-center gap-2"
-          >
-            <Users size={16} />
-            Anggota Kelompok
-          </a>
-        </motion.div>
-
-        {/* Stats */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.2 }}
-          className="mt-20 grid grid-cols-2 sm:grid-cols-4 gap-8 max-w-3xl mx-auto"
-        >
-          {[
-            { value: "3", label: "Teknologi Utama" },
-            { value: "2", label: "Tools Hosting" },
-            { value: "1", label: "AI Tools" },
-            { value: "4", label: "Anggota Tim" },
-          ].map((stat, i) => (
-            <div key={i} className="text-center">
-              <div className="text-2xl sm:text-3xl font-bold text-[#1A1A1A]">
-                {stat.value}
-              </div>
-              <div className="text-xs sm:text-sm text-[#1A1A1A]/40 mt-1">
-                {stat.label}
-              </div>
-            </div>
-          ))}
-        </motion.div>
-      </motion.div>
-
-      {/* Scroll Indicator */}
-      <motion.div
-        animate={{ y: [0, 10, 0] }}
-        transition={{ duration: 2, repeat: Infinity }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2"
-      >
-        <ChevronDown size={24} className="text-[#1A1A1A]/30" />
-      </motion.div>
-    </section>
   );
 }
 
@@ -992,7 +847,7 @@ export default function Home() {
   return (
     <div className="bg-[#FAFAFA] min-h-screen font-sans">
       <Navbar />
-      <HeroSection />
+      <ScrollVideo />
       <ProfilSection />
       <TeknologiSection />
       <AnalisisSection />
