@@ -51,6 +51,31 @@ const COLORS = {
 function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
+  const lenis = useSmoothScroll();
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  // Kunci scroll Lenis saat menu HP terbuka
+  useEffect(() => {
+    if (!lenis) return;
+    if (mobileOpen) {
+      lenis.stop();
+    } else {
+      lenis.start();
+    }
+  }, [lenis, mobileOpen]);
+
+  // Tutup menu saat tekan ESC
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setMobileOpen(false);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, []);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 60);
@@ -68,7 +93,7 @@ function Navbar() {
   ];
 
   return (
-    <>
+    <header className="w-full relative">
       <motion.nav
         initial={{ y: -100 }}
         animate={{ y: 0 }}
@@ -110,42 +135,95 @@ function Navbar() {
               ))}
             </div>
 
-            {/* Mobile Toggle */}
+            {/* Mobile Hamburger — z-[70] selalu di atas overlay (z-[60]) dan navbar (z-50) */}
             <button
-              onClick={() => setMobileOpen(!mobileOpen)}
-              className="md:hidden p-2 transition-colors duration-300 text-[#FAFAFA]"
+              onClick={() => setMobileOpen((v) => !v)}
+              aria-label={mobileOpen ? "Tutup menu" : "Buka menu"}
+              className="md:hidden relative z-[70] p-2 rounded-lg text-[#FAFAFA] hover:bg-white/10 active:bg-white/5 focus:outline-none transition-colors duration-200"
             >
-              {mobileOpen ? <X size={24} /> : <Menu size={24} />}
+              <AnimatePresence mode="wait" initial={false}>
+                {mounted && mobileOpen ? (
+                  <motion.span
+                    key="close"
+                    initial={{ rotate: -90, opacity: 0 }}
+                    animate={{ rotate: 0, opacity: 1 }}
+                    exit={{ rotate: 90, opacity: 0 }}
+                    transition={{ duration: 0.18 }}
+                    className="block"
+                  >
+                    <X size={26} />
+                  </motion.span>
+                ) : (
+                  <motion.span
+                    key="open"
+                    initial={{ rotate: 90, opacity: 0 }}
+                    animate={{ rotate: 0, opacity: 1 }}
+                    exit={{ rotate: -90, opacity: 0 }}
+                    transition={{ duration: 0.18 }}
+                    className="block"
+                  >
+                    <Menu size={26} />
+                  </motion.span>
+                )}
+              </AnimatePresence>
             </button>
           </div>
         </div>
       </motion.nav>
 
-      {/* Mobile Menu */}
+      {/* Mobile Menu Full-Screen Overlay — z-[60]: di atas navbar (50), di bawah hamburger (70) */}
       <AnimatePresence>
-        {mobileOpen && (
+        {mounted && mobileOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            className="fixed inset-0 z-40 bg-[#0A0A0A] pt-24 px-6 border-b border-white/[0.05]"
+            initial={{ opacity: 0, y: "-100%" }}
+            animate={{ opacity: 1, y: "0%" }}
+            exit={{ opacity: 0, y: "-100%" }}
+            transition={{ type: "spring", damping: 30, stiffness: 280 }}
+            className="fixed inset-0 z-[60] bg-[#0A0A0A]/98 backdrop-blur-xl flex flex-col pt-28 px-8 pb-10"
           >
-            <div className="flex flex-col gap-6">
-              {navLinks.map((link) => (
-                <a
+            {/* Dekorasi glow latar */}
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-72 h-72 bg-[#8B2F8B]/8 rounded-full blur-[80px] pointer-events-none" />
+
+            <nav className="flex flex-col gap-0 flex-1">
+              {navLinks.map((link, i) => (
+                <motion.a
                   key={link.name}
                   href={link.href}
                   onClick={() => setMobileOpen(false)}
-                  className="text-2xl text-[#FAFAFA]/80 hover:text-[#8B2F8B] transition-colors"
+                  initial={{ opacity: 0, x: -28 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: i * 0.06, duration: 0.3 }}
+                  className="group flex items-center justify-between py-5 border-b border-white/5 text-xl font-semibold text-[#FAFAFA]/70 hover:text-[#FAFAFA] active:text-[#8B2F8B] transition-colors duration-200"
                 >
-                  {link.name}
-                </a>
+                  <span>
+                    <span className="text-[#8B2F8B] text-sm font-mono mr-3">
+                      {String(i + 1).padStart(2, "0")}.
+                    </span>
+                    {link.name}
+                  </span>
+                  <ArrowRight
+                    size={16}
+                    className="text-[#FAFAFA]/20 group-hover:text-[#8B2F8B] group-hover:translate-x-1 transition-all duration-200"
+                  />
+                </motion.a>
               ))}
-            </div>
+            </nav>
+
+            {/* Footer branding */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.42 }}
+              className="text-center mt-8"
+            >
+              <span className="text-[10px] text-[#FAFAFA]/20 font-mono uppercase tracking-widest">
+                VISITASI<span className="text-[#8B2F8B]">ACM</span> — Access Media
+              </span>
+            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>
-    </>
+    </header>
   );
 }
 

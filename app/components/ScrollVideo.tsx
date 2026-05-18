@@ -202,7 +202,7 @@ export default function ScrollVideo({
                 SYSTEM INITIALIZATION
               </h2>
               <h1 className="text-2xl font-black tracking-tight text-[#FAFAFA] mb-6 font-sans">
-                EXPLORING <span className="text-[#B85FB8]">ACCESS</span> <span className="text-[#4CAF7A]">MEDIA</span>
+                EXPLORING <span className="text-[#B85FB8]">TIM</span> <span className="text-[#4CAF7A]">GACOR</span>
               </h1>
 
               {/* Progress Bar Container */}
