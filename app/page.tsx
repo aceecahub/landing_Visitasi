@@ -90,6 +90,7 @@ function Navbar() {
     { name: "Infrastruktur Server", href: "#server" },
     { name: "After Sales", href: "#after-sales" },
     { name: "Tim Visitasi", href: "#tim" },
+    { name: "Dokumentasi Reels", href: "#instagram-reels" },
   ];
 
   return (
@@ -1036,6 +1037,124 @@ function memberVideoFallback(videoUrl: string) {
   return videoUrl;
 }
 
+// ─── Instagram Reel Section ───
+function InstagramReelSection() {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
+
+  const features = [
+    {
+      title: "Perjalanan & Briefing",
+      desc: "Momen keberangkatan dan persiapan tim sebelum melakukan observasi langsung ke lokasi.",
+      icon: <Activity className="text-[#8B2F8B]" size={18} />
+    },
+    {
+      title: "Wawancara Eksklusif",
+      desc: "Diskusi seru bersama tim developer Access Media mengenai tantangan industri nyata.",
+      icon: <Brain className="text-[#2E8B57]" size={18} />
+    },
+    {
+      title: "Observasi Lapangan",
+      desc: "Melihat langsung ruang operasional server, infrastruktur, dan pembagian tugas tim IT.",
+      icon: <Server className="text-[#B85FB8]" size={18} />
+    }
+  ];
+
+  return (
+    <section id="instagram-reels" className="py-32 bg-[#0A0A0A] relative text-[#FAFAFA] overflow-hidden border-t border-white/[0.03]">
+      <div className="absolute inset-0 bg-radial-to-tr from-[#8B2F8B]/5 via-transparent to-transparent opacity-50" />
+      
+      <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10" ref={ref}>
+        <div className="grid lg:grid-cols-12 gap-16 items-center">
+          
+          {/* Left Column: Text & Features */}
+          <motion.div
+            initial={{ opacity: 0, x: -40 }}
+            animate={isInView ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.8 }}
+            className="lg:col-span-7 space-y-8"
+          >
+            <div>
+              <span className="text-[#8B2F8B] text-xs font-bold tracking-[0.25em] uppercase px-3.5 py-1.5 rounded-full bg-[#8B2F8B]/10 border border-[#8B2F8B]/25 font-mono">
+                07. Dokumentasi Reels
+              </span>
+              <h2 className="mt-6 text-4xl sm:text-5xl font-black tracking-tight leading-tight">
+                Intip Keseruan <br />
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#8B2F8B] to-[#2E8B57]">
+                  Visitasi Lapangan Kami
+                </span>
+              </h2>
+              <p className="mt-6 text-sm sm:text-base text-[#FAFAFA]/65 leading-relaxed max-w-xl">
+                Biar tidak spaneng membahas arsitektur server, database, dan codingan terus, yuk lihat rangkuman keseruan perjalanan observasi tim kami ke kantor <strong>Access Media (ACM)</strong> lewat video Reel Instagram interaktif berikut!
+              </p>
+            </div>
+
+            {/* Feature Highlights */}
+            <div className="space-y-4 max-w-lg">
+              {features.map((item, idx) => (
+                <div key={idx} className="p-4 rounded-xl border border-white/[0.03] bg-white/[0.01] flex items-start gap-4 hover:border-[#8B2F8B]/20 hover:bg-white/[0.02] transition-all duration-300">
+                  <div className="w-8 h-8 rounded-lg bg-white/[0.05] flex items-center justify-center shrink-0 mt-0.5">
+                    {item.icon}
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-sm text-[#FAFAFA]">{item.title}</h4>
+                    <p className="text-[11px] text-[#FAFAFA]/50 mt-1 leading-relaxed">{item.desc}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* CTA Button */}
+            <div className="pt-4">
+              <a
+                href="https://www.instagram.com/reel/DYfJZv8vCpS/?igsh=MThteTZmdm9hbW01MA=="
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gradient-to-r from-[#8B2F8B] to-[#B85FB8] text-xs font-bold font-mono tracking-widest text-[#FAFAFA] hover:shadow-[0_0_25px_rgba(139,47,139,0.5)] hover:scale-105 transition-all duration-300 uppercase"
+              >
+                Lihat Langsung di Instagram
+                <ArrowUpRight size={14} />
+              </a>
+            </div>
+          </motion.div>
+
+          {/* Right Column: Phone Mockup with Embedded Reel */}
+          <motion.div
+            initial={{ opacity: 0, x: 40 }}
+            animate={isInView ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="lg:col-span-5 flex justify-center"
+          >
+            {/* Smartphone Frame Mockup for Reel */}
+            <div className="relative w-full max-w-[340px] aspect-[9/16] bg-black rounded-[42px] p-3 border-[6px] border-white/10 shadow-[0_0_50px_rgba(139,47,139,0.3)] hover:border-[#8B2F8B]/40 hover:shadow-[0_0_60px_rgba(139,47,139,0.5)] transition-all duration-500">
+              
+              {/* Phone Camera Notch */}
+              <div className="absolute top-4 left-1/2 -translate-x-1/2 w-28 h-4 bg-black rounded-full z-20 flex items-center justify-center">
+                <div className="w-2 h-2 bg-neutral-900 rounded-full border border-neutral-800" />
+              </div>
+
+              {/* Embedded Iframe */}
+              <div className="w-full h-full rounded-[32px] overflow-hidden bg-[#0A0A0A] relative z-10">
+                <iframe
+                  src="https://www.instagram.com/reel/DYfJZv8vCpS/embed"
+                  className="w-full h-full border-0"
+                  scrolling="no"
+                  allowTransparency={true}
+                  allow="encrypted-media"
+                />
+              </div>
+
+              {/* Decorative phone button reflection overlay */}
+              <div className="absolute top-0 right-10 w-20 h-full bg-white/[0.01] skew-x-[-15deg] pointer-events-none z-20" />
+            </div>
+          </motion.div>
+
+        </div>
+      </div>
+    </section>
+  );
+}
+
 // ─── Footer ───
 function Footer() {
   return (
@@ -1082,6 +1201,7 @@ export default function Home() {
       <ServerSection />
       <AfterSalesSection />
       <TeamSection />
+      <InstagramReelSection />
       <Footer />
     </div>
   );
